@@ -3,10 +3,7 @@ import Link from "next/link";
 import { peopleData, Person } from "@/mock-data";
 import { useRouter } from "next/navigation";
 import EditPerson from "@/components/EditPerson";
-
-/**
- * TODO: allow editing the person type
- */
+import SelectBenefits from "@/SelectBenefits/SelectBenefits";
 
 async function getPerson(id: number): Promise<Person> {
   const response = await fetch(`http://localhost:3000/api/people/${id}`, {
@@ -24,5 +21,5 @@ async function getPerson(id: number): Promise<Person> {
 export default async function page({ params }: { params: { id: string } }) {
   // handle invalid id
   const person = await getPerson(Number(params.id));
-  return <EditPerson person={person} />;
+  return <SelectBenefits person={person} />;
 }

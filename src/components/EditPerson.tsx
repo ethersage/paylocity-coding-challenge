@@ -9,11 +9,8 @@ import { Person } from "@/mock-data";
  * TODO: allow editing the person type
  */
 
-export default function page({ person }: { person: Person }) {
+export default function EditPerson({ person }: { person: Person }) {
   const router = useRouter();
-  /**
-   * Replace this with API data fetching
-   */
   // TODO: handle non-number params
   // TODO: handle 404 when person not found
   // TODO: handle waiting state on save

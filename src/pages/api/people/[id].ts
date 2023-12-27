@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import peopleData, { Person } from "@/mock-data";
+import { peopleData, Person } from "@/mock-data";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;

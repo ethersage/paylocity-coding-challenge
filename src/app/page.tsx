@@ -25,6 +25,8 @@ export default async function Home() {
               </Link>
               &nbsp;
               <Link href={`/edit/${person.id}`}>[edit]</Link>
+              &nbsp;
+              <Link href={`/select/${person.id}`}>[select benefits]</Link>
             </li>
           ))}
         </ul>
