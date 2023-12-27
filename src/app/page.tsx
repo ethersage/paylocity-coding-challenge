@@ -1,11 +1,33 @@
+import { Person } from "@/mock-data";
 import styles from "./page.module.css";
-import ListPeople from "@/ListPeople/ListPeople";
+import Link from "next/link";
 
-export default function Home() {
+async function getPeople() {
+  const res = await fetch(`http://localhost:3000/api/people`, {
+    cache: "no-store",
+  });
+  const people = await res.json();
+
+  return people;
+}
+
+export default async function Home() {
+  const people = await getPeople();
+
   return (
     <main className={styles.main}>
       <div className={styles.center}>
-        <ListPeople />
+        <ul>
+          {people.map((person: Person) => (
+            <li key={person.id}>
+              <Link href={`/edit`}>
+                {person.name} ({person.type})
+              </Link>
+              &nbsp;
+              <Link href={`/edit/${person.id}`}>[edit]</Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </main>
   );

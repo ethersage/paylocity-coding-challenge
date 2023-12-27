@@ -1,46 +1,26 @@
-"use client";
-
 import { FormEvent, useState } from "react";
 import Link from "next/link";
-import peopleData from "@/mock-data";
+import peopleData, { Person } from "@/mock-data";
 import { useRouter } from "next/navigation";
+import EditPerson from "@/components/EditPerson";
 
-export default function page({ params }: { params: { id: string } }) {
-  const router = useRouter();
-  /**
-   * Replace this with API data fetching
-   */
-  // TODO: handle non-number params
-  // TODO: handle 404 when person not found
-  const person = peopleData.find((p) => p.id === Number(params.id));
+/**
+ * TODO: allow editing the person type
+ */
 
-  const [name, setName] = useState(person?.name || "");
+async function getPerson(id: number): Promise<Person> {
+  const response = await fetch(`http://localhost:3000/api/people/${id}`);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
-    console.log("onsubmit");
-    e.preventDefault();
-
-    if (person) {
-      person.name = name;
-    }
-
-    router.push("/");
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  function onChange(e: FormEvent<HTMLInputElement>) {
-    setName(e.currentTarget.value);
+  const data = await response.json();
+  return data;
+}
 
-    // replace with API call
-  }
-
-  return (
-    <>
-      <Link href="/">Back to People</Link>
-      <h1>Edit {person?.name}</h1>
-      <form onSubmit={onSubmit}>
-        <input type="text" value={name} onChange={onChange} />
-        <button type="submit">Save</button>
-      </form>
-    </>
-  );
+export default async function page({ params }: { params: { id: string } }) {
+  // handle invalid id
+  const person = await getPerson(Number(params.id));
+  return <EditPerson person={person} />;
 }
