@@ -9,7 +9,9 @@ import EditPerson from "@/components/EditPerson";
  */
 
 async function getPerson(id: number): Promise<Person> {
-  const response = await fetch(`http://localhost:3000/api/people/${id}`);
+  const response = await fetch(`http://localhost:3000/api/people/${id}`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
