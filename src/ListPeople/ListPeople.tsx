@@ -2,41 +2,19 @@
  * List the employee and their dependents
  */
 
-type PersonType = "employee" | "spouse" | "dependent";
-
-interface Person {
-  id: number;
-  name: string;
-  type: PersonType;
-}
-
-/**
- * Mock out data, will move this into a API if we get time
- */
-const peopleData: Person[] = [
-  {
-    id: 0,
-    name: "Joshua Kaminetsky",
-    type: "employee",
-  },
-  {
-    id: 1,
-    name: "Bridget Kaminetsky",
-    type: "spouse",
-  },
-  {
-    id: 2,
-    name: "Amelia Kaminetsky",
-    type: "dependent",
-  },
-];
+import peopleData from "@/mock-data";
+import Link from "next/link";
 
 export default function ListPeople() {
   return (
     <ul>
       {peopleData.map((person) => (
         <li key={person.id}>
-          {person.name} ({person.type})
+          <Link href={`/edit`}>
+            {person.name} ({person.type})
+          </Link>
+          &nbsp;
+          <Link href={`/edit/${person.id}`}>[edit]</Link>
         </li>
       ))}
     </ul>
