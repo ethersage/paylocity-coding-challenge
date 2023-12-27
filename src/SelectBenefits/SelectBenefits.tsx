@@ -15,7 +15,7 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
   const availableBenefits: Benefit[] = useMemo(
     () =>
-      // sort the benefits too
+      // TODO: sort the benefits too
       benefitData.filter(
         (benefit) => benefits.find((b) => b.id === benefit.id) === undefined
       ),
@@ -24,25 +24,27 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
   async function onSelectBenefit(id: number) {
     const newBenefit = availableBenefits.find((b) => b.id === id);
-    console.log(newBenefit);
+
     if (newBenefit) {
-      setBenefits([...benefits, newBenefit]);
+      const newBenefits = [...benefits, newBenefit];
+      console.log(benefits);
+      console.log(newBenefits);
       try {
-        // const response = await fetch(
-        //   `http://localhost:3000/api/people/${person.id}`,
-        //   {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({ ...person, benefits: [] }),
-        //   }
-        // );
-        // console.log(response);
-        // if (!response.ok) {
-        //   throw new Error(`HTTP error! status: ${response.status}`);
-        // }
-        // Handle the response data as needed
+        const response = await fetch(
+          `http://localhost:3000/api/people/${person.id}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ ...person, benefits: newBenefits }),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        setBenefits(newBenefits);
       } catch (error) {
         console.error(error);
       }

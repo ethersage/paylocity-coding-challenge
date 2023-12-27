@@ -22,11 +22,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
       const newPerson: Person = req.body;
 
-      // Add more complex validation, like don't allow multiple employees, for example
-      // Simple validation
-      if (!newPerson.name) {
-        return res.status(400).json({ message: "Name is required" });
-      }
+      // TODO: add validation
 
       // Check if person already exists (based on id)
       const existingIndex = peopleData.findIndex((p) => p.id === newPerson.id);
@@ -35,7 +31,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         // Update existing person
         console.log({ newPerson });
         peopleData[existingIndex] = newPerson;
-        console.log({ peopleData });
+        console.log(peopleData[0].benefits.map((b) => b.type));
       } else {
         return res.status(400).json({ message: "Person not found" });
       }
