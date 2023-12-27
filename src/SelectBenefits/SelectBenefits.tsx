@@ -15,38 +15,38 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
   const availableBenefits: Benefit[] = useMemo(
     () =>
+      // sort the benefits too
       benefitData.filter(
         (benefit) => benefits.find((b) => b.id === benefit.id) === undefined
       ),
     [benefits]
   );
 
-  async function onSave(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/people/${person.id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ ...person, name }),
-        }
-      );
-      console.log(response);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+  async function onSelectBenefit(id: number) {
+    const newBenefit = availableBenefits.find((b) => b.id === id);
+    console.log(newBenefit);
+    if (newBenefit) {
+      setBenefits([...benefits, newBenefit]);
+      try {
+        // const response = await fetch(
+        //   `http://localhost:3000/api/people/${person.id}`,
+        //   {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({ ...person, benefits: [] }),
+        //   }
+        // );
+        // console.log(response);
+        // if (!response.ok) {
+        //   throw new Error(`HTTP error! status: ${response.status}`);
+        // }
+        // Handle the response data as needed
+      } catch (error) {
+        console.error(error);
       }
-
-      // Handle the response data as needed
-    } catch (error) {
-      console.error(error);
     }
-
-    window.location.href = "http://localhost:3000/";
   }
 
   return (
@@ -55,14 +55,19 @@ export default function SelectBenefits({ person }: { person: Person }) {
       <h1>Select benefits for {person?.name}</h1>
       <h2>Selected benefits</h2>
       <ul>
-        {person.benefits.map((benefit) => (
+        {benefits.map((benefit) => (
           <li key={benefit.id}>{benefit.type}</li>
         ))}
       </ul>
       <h2>Available benefits</h2>
       <ul>
         {availableBenefits.map((benefit) => (
-          <li key={benefit.id}>{benefit.type}</li>
+          <li key={benefit.id}>
+            {benefit.type}&nbsp;
+            <button type="button" onClick={() => onSelectBenefit(benefit.id)}>
+              select
+            </button>
+          </li>
         ))}
       </ul>
     </>
