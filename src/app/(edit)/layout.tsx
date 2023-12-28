@@ -1,3 +1,5 @@
+import styles from "./layout.module.css";
+
 export default function EditLayout({
   children,
 }: {
@@ -5,7 +7,9 @@ export default function EditLayout({
 }) {
   return (
     <>
-      <a href="/">{"<"} Back to People</a>
+      <div className={styles.back}>
+        <a href="/">{"<"} Back to People</a>
+      </div>
       {children}
     </>
   );
