@@ -74,6 +74,24 @@ export default function SelectBenefits({ person }: { person: Person }) {
     <>
       <h1>{person?.name}</h1>
       <p className={styles["benefits-group"]}>Select benefits</p>
+      <div className="benefits-group">
+        <h2>Available benefits</h2>
+        <ul>
+          {availableBenefits.length === 0
+            ? "None"
+            : availableBenefits.map((benefit) => (
+                <li key={benefit.id}>
+                  <button
+                    type="button"
+                    onClick={() => onSelectBenefit(benefit.id)}
+                  >
+                    Select
+                  </button>
+                  {benefit.type}
+                </li>
+              ))}
+        </ul>
+      </div>
       <div className={styles["benefits-group"]}>
         <h2>Selected benefits</h2>
         <ul>
@@ -90,19 +108,6 @@ export default function SelectBenefits({ person }: { person: Person }) {
                   {benefit.type}
                 </li>
               ))}
-        </ul>
-      </div>
-      <div className="benefits-group">
-        <h2>Available benefits</h2>
-        <ul>
-          {availableBenefits.map((benefit) => (
-            <li key={benefit.id}>
-              <button type="button" onClick={() => onSelectBenefit(benefit.id)}>
-                Select
-              </button>
-              {benefit.type}
-            </li>
-          ))}
         </ul>
       </div>
     </>
