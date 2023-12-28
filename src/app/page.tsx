@@ -13,6 +13,12 @@ async function getPeople() {
   return people;
 }
 
+let usd = new Intl.NumberFormat("en-US", {
+  currency: "USD",
+  maximumFractionDigits: 0,
+  style: "currency",
+});
+
 export default async function Home() {
   const people = await getPeople();
 
@@ -22,21 +28,21 @@ export default async function Home() {
       <div className={styles.center}>
         <ul>
           {people.map((person: Person) => (
-            <li key={person.id}>
+            <li className="person" key={person.id}>
               <div>
-                <Link href={`/edit`}>
-                  {person.name} ({person.type})
-                </Link>
-                &nbsp;
-                <Link href={`/edit/${person.id}`}>[edit]</Link>
-                &nbsp;
-                <Link href={`/select/${person.id}`}>[select benefits]</Link>
+                {person.name} ({person.type})
               </div>
               <div>
-                Selected benefits:{" "}
-                {person.benefits.map((benefit) => benefit.type).join("")}
+                Selected benefits:&nbsp;
+                {person.benefits.map((benefit) => benefit.type).join(", ")}
               </div>
-              <div>Cost: {person.cost}</div>
+              <div>Cost: {usd.format(person.cost)}</div>
+              <Link href={`/edit/${person.id}`}>
+                <button>Edit Person</button>
+              </Link>
+              <Link href={`/select/${person.id}`}>
+                <button>Select Benefits</button>
+              </Link>
             </li>
           ))}
         </ul>
