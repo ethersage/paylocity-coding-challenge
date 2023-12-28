@@ -51,7 +51,7 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
   return (
     <>
-      <Link href="/">Back to People</Link>
+      <a href="/">Back to People</a>
       <h1>Select benefits for {person?.name}</h1>
       <h2>Selected benefits</h2>
       <ul>
