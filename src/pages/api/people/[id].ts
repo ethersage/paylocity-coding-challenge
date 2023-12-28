@@ -24,8 +24,12 @@ function calculateAnnualCost(person: Person) {
   return cost;
 }
 
-function calculatePerPayPeriodCost(cost: number) {
-  return cost / 26;
+function calculatePerPayPeriodCost(annualCost: number) {
+  return annualCost / 26;
+}
+
+function calculateNetPayPerPayPeriod(perPayPeriodCost: number) {
+  return 2000 - perPayPeriodCost;
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -59,6 +63,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         newPerson.annualCost = calculateAnnualCost(newPerson);
         newPerson.perPayPeriodCost = calculatePerPayPeriodCost(
           newPerson.annualCost
+        );
+        newPerson.netPayPerPayPeriod = calculateNetPayPerPayPeriod(
+          newPerson.perPayPeriodCost
         );
         peopleData[existingIndex] = newPerson;
       } else {

@@ -47,8 +47,12 @@ export default async function Home() {
               </div>
               <div>Annual cost: {usdRounded.format(person.annualCost)}</div>
               <div>
-                Per pay period cost:{" "}
+                Per pay period cost:&nbsp;
                 {usdUnrounded.format(person.perPayPeriodCost)}
+              </div>
+              <div>
+                Net pay per pay period:&nbsp;
+                {usdUnrounded.format(person.netPayPerPayPeriod)}
               </div>
               <Link href={`/edit/${person.id}`}>
                 <button>Edit Person</button>

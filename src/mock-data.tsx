@@ -11,6 +11,7 @@ export interface Person {
   benefits: Benefit[];
   annualCost: number;
   perPayPeriodCost: number;
+  netPayPerPayPeriod: number;
 }
 
 export type BenefitType = "Medical" | "Dental" | "Vision";
@@ -31,6 +32,7 @@ const peopleData: Person[] = [
     benefits: [],
     annualCost: 0,
     perPayPeriodCost: 0,
+    netPayPerPayPeriod: 2000,
   },
   {
     id: 1,
@@ -39,6 +41,8 @@ const peopleData: Person[] = [
     type: "Spouse",
     benefits: [],
     annualCost: 0,
+    perPayPeriodCost: 0,
+    netPayPerPayPeriod: 2000,
   },
   {
     id: 2,
@@ -47,6 +51,8 @@ const peopleData: Person[] = [
     type: "Child",
     benefits: [],
     annualCost: 0,
+    perPayPeriodCost: 0,
+    netPayPerPayPeriod: 2000,
   },
 ];
 
