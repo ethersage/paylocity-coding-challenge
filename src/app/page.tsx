@@ -34,7 +34,9 @@ export default async function Home() {
               </div>
               <div>
                 Selected benefits:&nbsp;
-                {person.benefits.map((benefit) => benefit.type).join(", ")}
+                {person.benefits.length === 0
+                  ? "None"
+                  : person.benefits.map((benefit) => benefit.type).join(", ")}
               </div>
               <div>Cost: {usd.format(person.cost)}</div>
               <Link href={`/edit/${person.id}`}>
