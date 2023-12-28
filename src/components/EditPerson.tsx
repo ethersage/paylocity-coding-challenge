@@ -51,7 +51,6 @@ export default function EditPerson({ person }: { person: Person }) {
 
   return (
     <>
-      <Link href="/">Back to People</Link>
       <h1>Edit {person?.name}</h1>
       <form onSubmit={onSubmit}>
         <input type="text" value={name} onChange={onChange} />

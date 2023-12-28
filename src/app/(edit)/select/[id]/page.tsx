@@ -15,7 +15,8 @@ async function getPerson(id: number): Promise<Person> {
 }
 
 export default async function page({ params }: { params: { id: string } }) {
-  // handle invalid id
+  // If this isn't a parsable number, it will be NaN and getPerson will throw an error
   const person = await getPerson(Number(params.id));
+
   return <SelectBenefits person={person} />;
 }

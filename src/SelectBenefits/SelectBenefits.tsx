@@ -51,7 +51,6 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
   return (
     <>
-      <a href="/">Back to People</a>
       <h1>Select benefits for {person?.name}</h1>
       <h2>Selected benefits</h2>
       <ul>
@@ -63,10 +62,10 @@ export default function SelectBenefits({ person }: { person: Person }) {
       <ul>
         {availableBenefits.map((benefit) => (
           <li key={benefit.id}>
-            {benefit.type}&nbsp;
             <button type="button" onClick={() => onSelectBenefit(benefit.id)}>
               select
             </button>
+            {benefit.type}
           </li>
         ))}
       </ul>

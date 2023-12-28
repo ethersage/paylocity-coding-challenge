@@ -17,7 +17,8 @@ export default async function Home() {
   const people = await getPeople();
 
   return (
-    <main className={styles.main}>
+    <>
+      <h1>Benefits Summary</h1>
       <div className={styles.center}>
         <ul>
           {people.map((person: Person) => (
@@ -40,6 +41,6 @@ export default async function Home() {
           ))}
         </ul>
       </div>
-    </main>
+    </>
   );
 }

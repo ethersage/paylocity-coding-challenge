@@ -1,10 +1,6 @@
 import EditPerson from "@/components/EditPerson";
 import { Person } from "@/mock-data";
 
-/**
- * TODO: allow editing the person type
- */
-
 async function getPerson(id: number): Promise<Person> {
   const response = await fetch(`http://localhost:3000/api/people/${id}`, {
     cache: "no-store",
@@ -19,7 +15,9 @@ async function getPerson(id: number): Promise<Person> {
 }
 
 export default async function page({ params }: { params: { id: string } }) {
-  // handle invalid id
-  const person = await getPerson(Number(params.id));
+  // If this isn't a parsable number, it will be NaN and getPerson will throw an error
+  const idNumber = Number(params.id);
+
+  const person = await getPerson(idNumber);
   return <EditPerson person={person} />;
 }
