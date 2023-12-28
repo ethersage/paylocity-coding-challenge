@@ -14,9 +14,15 @@ async function getPeople() {
   return people;
 }
 
-let usd = new Intl.NumberFormat("en-US", {
+const usdRounded = new Intl.NumberFormat("en-US", {
   currency: "USD",
   maximumFractionDigits: 0,
+  style: "currency",
+});
+
+const usdUnrounded = new Intl.NumberFormat("en-US", {
+  currency: "USD",
+  maximumFractionDigits: 2,
   style: "currency",
 });
 
@@ -39,7 +45,11 @@ export default async function Home() {
                   ? "None"
                   : person.benefits.map((benefit) => benefit.type).join(", ")}
               </div>
-              <div>Cost: {usd.format(person.cost)}</div>
+              <div>Annual cost: {usdRounded.format(person.annualCost)}</div>
+              <div>
+                Per pay period cost:{" "}
+                {usdUnrounded.format(person.perPayPeriodCost)}
+              </div>
               <Link href={`/edit/${person.id}`}>
                 <button>Edit Person</button>
               </Link>

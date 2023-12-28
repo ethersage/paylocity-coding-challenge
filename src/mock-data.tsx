@@ -9,7 +9,8 @@ export interface Person {
   lastName: string;
   type: PersonType;
   benefits: Benefit[];
-  cost: number;
+  annualCost: number;
+  perPayPeriodCost: number;
 }
 
 export type BenefitType = "Medical" | "Dental" | "Vision";
@@ -28,7 +29,8 @@ const peopleData: Person[] = [
     lastName: "Kaminetsky",
     type: "Employee",
     benefits: [],
-    cost: 0,
+    annualCost: 0,
+    perPayPeriodCost: 0,
   },
   {
     id: 1,
@@ -36,7 +38,7 @@ const peopleData: Person[] = [
     lastName: "Kaminetsky",
     type: "Spouse",
     benefits: [],
-    cost: 0,
+    annualCost: 0,
   },
   {
     id: 2,
@@ -44,7 +46,7 @@ const peopleData: Person[] = [
     lastName: "Kaminetsky",
     type: "Child",
     benefits: [],
-    cost: 0,
+    annualCost: 0,
   },
 ];
 

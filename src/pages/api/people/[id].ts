@@ -4,7 +4,7 @@ import { peopleData, Person } from "@/mock-data";
 
 // TODO: move into it's own module
 // See README for rationale behind calculation
-function calculateCost(person: Person) {
+function calculateAnnualCost(person: Person) {
   let cost = 0;
 
   const costPerBenefit = person.type === "Employee" ? 1000 : 500;
@@ -22,6 +22,10 @@ function calculateCost(person: Person) {
   }
 
   return cost;
+}
+
+function calculatePerPayPeriodCost(cost: number) {
+  return cost / 26;
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -52,7 +56,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
       if (existingIndex > -1) {
         // Update existing person
-        newPerson.cost = calculateCost(newPerson);
+        newPerson.annualCost = calculateAnnualCost(newPerson);
+        newPerson.perPayPeriodCost = calculatePerPayPeriodCost(
+          newPerson.annualCost
+        );
         peopleData[existingIndex] = newPerson;
       } else {
         return res.status(400).json({ message: "Person not found" });
