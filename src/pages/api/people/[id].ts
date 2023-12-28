@@ -11,11 +11,12 @@ function calculateCost(person: Person) {
   cost = person.benefits.length * costPerBenefit;
 
   // API should make sure name should never be empty, but just in case
-  if (person.name.length > 0) {
+  if (person.firstName.length > 0) {
     // Maybe API should be capitalizing names for us, but it doesn't currently
     // Not even sure what the business rules around that should be as names can have
     // different capitalization rules in different cultures
-    const discount = person.name[0] === "A" || person.name[0] === "a" ? 0.1 : 0;
+    const discount =
+      person.firstName[0] === "A" || person.firstName[0] === "a" ? 0.1 : 0;
 
     cost = cost * (1 - discount);
   }
@@ -52,6 +53,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       if (existingIndex > -1) {
         // Update existing person
         newPerson.cost = calculateCost(newPerson);
+        console.log(newPerson);
         peopleData[existingIndex] = newPerson;
       } else {
         return res.status(400).json({ message: "Person not found" });

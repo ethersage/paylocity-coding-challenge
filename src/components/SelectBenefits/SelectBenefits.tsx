@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Benefit, BenefitType, Person, benefitData } from "@/mock-data";
 
 import styles from "./SelectBenefits.module.css";
+import { formatName } from "@/utils";
 
 export const benefitDisplayOrder: BenefitType[] = [
   "Medical",
@@ -72,7 +73,7 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
   return (
     <>
-      <h1>{person?.name}</h1>
+      <h1>{formatName(person)}</h1>
       <p className={styles["benefits-group"]}>Select benefits</p>
       <div className="benefits-group">
         <h2>Available benefits</h2>

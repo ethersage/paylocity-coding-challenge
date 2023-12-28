@@ -1,4 +1,4 @@
-import SelectBenefits from "@/SelectBenefits/SelectBenefits";
+import SelectBenefits from "@/components/SelectBenefits/SelectBenefits";
 import { Person } from "@/mock-data";
 
 async function getPerson(id: number): Promise<Person> {

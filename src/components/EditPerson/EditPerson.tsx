@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { Person } from "@/mock-data";
+import { formatName } from "@/utils";
 
 /**
  * TODO: allow editing the person type
@@ -13,7 +14,9 @@ export default function EditPerson({ person }: { person: Person }) {
   const router = useRouter();
   // TODO: handle waiting state on save
 
-  const [name, setName] = useState(person?.name || "");
+  const [firstName, setFirstName] = useState(person?.firstName || "");
+  const [middleName, setMiddleName] = useState(person?.middleName || "");
+  const [lastName, setLastName] = useState(person?.lastName || "");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,7 +29,7 @@ export default function EditPerson({ person }: { person: Person }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...person, name }),
+          body: JSON.stringify({ ...person, firstName, middleName, lastName }),
         }
       );
 
@@ -42,15 +45,31 @@ export default function EditPerson({ person }: { person: Person }) {
     window.location.href = "http://localhost:3000/";
   }
 
-  function onChange(e: FormEvent<HTMLInputElement>) {
-    setName(e.currentTarget.value);
+  function onFirstNameChange(e: FormEvent<HTMLInputElement>) {
+    setFirstName(e.currentTarget.value);
+  }
+
+  function onMiddleNameChange(e: FormEvent<HTMLInputElement>) {
+    setMiddleName(e.currentTarget.value);
+  }
+
+  function onLastNameChange(e: FormEvent<HTMLInputElement>) {
+    setLastName(e.currentTarget.value);
   }
 
   return (
     <>
-      <h1>Edit {person?.name}</h1>
+      <h1>Edit {formatName(person)}</h1>
       <form onSubmit={onSubmit}>
-        <input type="text" value={name} onChange={onChange} />
+        <label>First Name</label>
+        <input type="text" value={firstName} onChange={onFirstNameChange} />
+
+        <label>Middle Name</label>
+        <input type="text" value={middleName} onChange={onMiddleNameChange} />
+
+        <label>Last Name</label>
+        <input type="text" value={lastName} onChange={onLastNameChange} />
+
         <button type="submit">Save</button>
       </form>
     </>

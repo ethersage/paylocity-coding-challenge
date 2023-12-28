@@ -4,7 +4,9 @@ export type PersonType = "Employee" | "Spouse" | "Child";
 
 export interface Person {
   id: number;
-  name: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
   type: PersonType;
   benefits: Benefit[];
   cost: number;
@@ -21,21 +23,25 @@ export interface Benefit {
 const peopleData: Person[] = [
   {
     id: 0,
-    name: "Joshua Kaminetsky",
+    firstName: "Joshua",
+    middleName: "Michael",
+    lastName: "Kaminetsky",
     type: "Employee",
     benefits: [],
     cost: 0,
   },
   {
     id: 1,
-    name: "Bridget Kaminetsky",
+    firstName: "Bridget",
+    lastName: "Kaminetsky",
     type: "Spouse",
     benefits: [],
     cost: 0,
   },
   {
     id: 2,
-    name: "Amelia Kaminetsky",
+    firstName: "Amelia",
+    lastName: "Kaminetsky",
     type: "Child",
     benefits: [],
     cost: 0,

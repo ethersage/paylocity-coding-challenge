@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Person } from "@/mock-data";
 
 import styles from "./page.module.css";
+import { formatName } from "@/utils";
 
 async function getPeople() {
   const res = await fetch(`http://localhost:3000/api/people`, {
@@ -30,7 +31,7 @@ export default async function Home() {
           {people.map((person: Person) => (
             <li className="person" key={person.id}>
               <div>
-                {person.name} ({person.type})
+                {formatName(person)} ({person.type})
               </div>
               <div>
                 Selected benefits:&nbsp;

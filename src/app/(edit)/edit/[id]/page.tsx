@@ -1,4 +1,4 @@
-import EditPerson from "@/components/EditPerson";
+import EditPerson from "@/components/EditPerson/EditPerson";
 import { Person } from "@/mock-data";
 
 async function getPerson(id: number): Promise<Person> {
