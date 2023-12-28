@@ -22,6 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - The requirements state that benefits cost $1000 per employee and $500 for dependents, but this does not specify how much each benefits itself costs, so I've assumed each benefit (medical, dental, vision) costs a separate $1000/500.
 - Initial implementation I am displaying total annual cost rather than per pay period because the requirements were not specific, but I'd like to go back and display a per pay period amount in addition to the yearly.
+- I wasn't sure how employees being paid $2,000 per paycheck worked into the problem so I omitted it. If I had more time, maybe I'd add expected net pay rather than just the benefits cost.
 
 ## Technical decisions
 

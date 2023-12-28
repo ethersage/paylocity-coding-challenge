@@ -53,7 +53,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       if (existingIndex > -1) {
         // Update existing person
         newPerson.cost = calculateCost(newPerson);
-        console.log(newPerson);
         peopleData[existingIndex] = newPerson;
       } else {
         return res.status(400).json({ message: "Person not found" });
