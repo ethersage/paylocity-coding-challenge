@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Person } from "@/mock-data";
+import { Person, PersonType } from "@/mock-data";
 import { formatName } from "@/utils";
 
 /**
@@ -17,6 +17,7 @@ export default function EditPerson({ person }: { person: Person }) {
   const [firstName, setFirstName] = useState(person?.firstName || "");
   const [middleName, setMiddleName] = useState(person?.middleName || "");
   const [lastName, setLastName] = useState(person?.lastName || "");
+  const [type, setType] = useState(person.type);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,7 +30,13 @@ export default function EditPerson({ person }: { person: Person }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...person, firstName, middleName, lastName }),
+          body: JSON.stringify({
+            ...person,
+            firstName,
+            middleName,
+            lastName,
+            type,
+          }),
         }
       );
 
@@ -57,6 +64,10 @@ export default function EditPerson({ person }: { person: Person }) {
     setLastName(e.currentTarget.value);
   }
 
+  function onTypeChange(e: FormEvent<HTMLSelectElement>) {
+    setType(e.currentTarget.value as PersonType);
+  }
+
   return (
     <>
       <h1>Edit {formatName(person)}</h1>
@@ -69,6 +80,14 @@ export default function EditPerson({ person }: { person: Person }) {
 
         <label>Last Name</label>
         <input type="text" value={lastName} onChange={onLastNameChange} />
+
+        <label>Type</label>
+        <select value={type} onChange={onTypeChange}>
+          {/* TODO: generate these from the data and types */}
+          <option>Employee</option>
+          <option>Spouse</option>
+          <option>Child</option>
+        </select>
 
         <button type="submit">Save</button>
       </form>
