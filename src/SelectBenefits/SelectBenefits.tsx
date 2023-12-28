@@ -35,36 +35,7 @@ export default function SelectBenefits({ person }: { person: Person }) {
     [benefits]
   );
 
-  async function onSelectBenefit(id: number) {
-    const newBenefit = availableBenefits.find((b) => b.id === id);
-
-    if (newBenefit) {
-      const newBenefits = [...benefits, newBenefit];
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/people/${person.id}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ ...person, benefits: newBenefits }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        setBenefits(newBenefits);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
-
-  async function onDeselectBenefit(id: number) {
-    const newBenefits = benefits.filter((benefit) => benefit.id !== id);
-
+  async function saveBenefits(benefits: Benefit[]) {
     try {
       const response = await fetch(
         `http://localhost:3000/api/people/${person.id}`,
@@ -73,17 +44,31 @@ export default function SelectBenefits({ person }: { person: Person }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...person, benefits: newBenefits }),
+          body: JSON.stringify({ ...person, benefits }),
         }
       );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      setBenefits(newBenefits);
+      setBenefits(benefits);
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async function onSelectBenefit(id: number) {
+    const newBenefit = availableBenefits.find((b) => b.id === id);
+
+    if (newBenefit) {
+      saveBenefits([...benefits, newBenefit]);
+    }
+  }
+
+  async function onDeselectBenefit(id: number) {
+    const newBenefits = benefits.filter((benefit) => benefit.id !== id);
+
+    saveBenefits(newBenefits);
   }
 
   return (
