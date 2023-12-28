@@ -138,7 +138,9 @@ div {
   margin: 0.25rem 0;
 }
 
-h1 {
+h1,
+h2,
+p {
   margin-bottom: 1rem;
 }
 

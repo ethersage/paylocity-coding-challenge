@@ -7,7 +7,7 @@ import { peopleData, Person } from "@/mock-data";
 function calculateCost(person: Person) {
   let cost = 0;
 
-  const costPerBenefit = person.type === "employee" ? 1000 : 500;
+  const costPerBenefit = person.type === "Employee" ? 1000 : 500;
   cost = person.benefits.length * costPerBenefit;
 
   // API should make sure name should never be empty, but just in case

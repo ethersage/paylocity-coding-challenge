@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 
 import { Benefit, BenefitType, Person, benefitData } from "@/mock-data";
 
+import styles from "./SelectBenefits.module.css";
+
 export const benefitDisplayOrder: BenefitType[] = [
   "Medical",
   "Dental",
@@ -19,9 +21,6 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
   const availableBenefits: Benefit[] = useMemo(
     () =>
-      // console.log(benefitData) ||
-      // TODO: sort the benefits too
-
       benefitData
         .filter(
           (benefit) => benefits.find((b) => b.id === benefit.id) === undefined
@@ -73,29 +72,39 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
   return (
     <>
-      <h1>Select benefits for {person?.name}</h1>
-      <h2>Selected benefits</h2>
-      <ul>
-        {benefits.map((benefit) => (
-          <li key={benefit.id}>
-            <button type="button" onClick={() => onDeselectBenefit(benefit.id)}>
-              Deselect
-            </button>
-            {benefit.type}
-          </li>
-        ))}
-      </ul>
-      <h2>Available benefits</h2>
-      <ul>
-        {availableBenefits.map((benefit) => (
-          <li key={benefit.id}>
-            <button type="button" onClick={() => onSelectBenefit(benefit.id)}>
-              Select
-            </button>
-            {benefit.type}
-          </li>
-        ))}
-      </ul>
+      <h1>{person?.name}</h1>
+      <p className={styles["benefits-group"]}>Select benefits</p>
+      <div className={styles["benefits-group"]}>
+        <h2>Selected benefits</h2>
+        <ul>
+          {benefits.length === 0
+            ? "None"
+            : benefits.map((benefit) => (
+                <li key={benefit.id}>
+                  <button
+                    type="button"
+                    onClick={() => onDeselectBenefit(benefit.id)}
+                  >
+                    Deselect
+                  </button>
+                  {benefit.type}
+                </li>
+              ))}
+        </ul>
+      </div>
+      <div className="benefits-group">
+        <h2>Available benefits</h2>
+        <ul>
+          {availableBenefits.map((benefit) => (
+            <li key={benefit.id}>
+              <button type="button" onClick={() => onSelectBenefit(benefit.id)}>
+                Select
+              </button>
+              {benefit.type}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
