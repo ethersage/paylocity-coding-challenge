@@ -1,6 +1,8 @@
-import { Person } from "@/mock-data";
-import styles from "./page.module.css";
 import Link from "next/link";
+
+import { Person } from "@/mock-data";
+
+import styles from "./page.module.css";
 
 async function getPeople() {
   const res = await fetch(`http://localhost:3000/api/people`, {

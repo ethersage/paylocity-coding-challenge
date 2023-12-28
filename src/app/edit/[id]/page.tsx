@@ -1,8 +1,5 @@
-import { FormEvent, useState } from "react";
-import Link from "next/link";
-import { peopleData, Person } from "@/mock-data";
-import { useRouter } from "next/navigation";
 import EditPerson from "@/components/EditPerson";
+import { Person } from "@/mock-data";
 
 /**
  * TODO: allow editing the person type

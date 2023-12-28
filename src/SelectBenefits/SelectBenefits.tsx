@@ -1,8 +1,8 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
-import Link from "next/link";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { Benefit, Person, benefitData } from "@/mock-data";
 
 export default function SelectBenefits({ person }: { person: Person }) {

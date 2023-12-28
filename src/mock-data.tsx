@@ -1,3 +1,5 @@
+// TODO: extract types out to their own files since they're not "mock data" as the
+// module name implies
 export type PersonType = "employee" | "spouse" | "dependent";
 
 export interface Person {

@@ -1,9 +1,5 @@
-import { FormEvent, useState } from "react";
-import Link from "next/link";
-import { peopleData, Person } from "@/mock-data";
-import { useRouter } from "next/navigation";
-import EditPerson from "@/components/EditPerson";
 import SelectBenefits from "@/SelectBenefits/SelectBenefits";
+import { Person } from "@/mock-data";
 
 async function getPerson(id: number): Promise<Person> {
   const response = await fetch(`http://localhost:3000/api/people/${id}`, {

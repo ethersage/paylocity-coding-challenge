@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Benefit, peopleData, Person } from "@/mock-data";
+
+import { peopleData, Person } from "@/mock-data";
 
 // TODO: move into it's own module
 // See README for rationale behind calculation
