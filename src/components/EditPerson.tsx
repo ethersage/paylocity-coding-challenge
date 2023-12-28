@@ -12,8 +12,6 @@ import { Person } from "@/mock-data";
 
 export default function EditPerson({ person }: { person: Person }) {
   const router = useRouter();
-  // TODO: handle non-number params
-  // TODO: handle 404 when person not found
   // TODO: handle waiting state on save
 
   const [name, setName] = useState(person?.name || "");
