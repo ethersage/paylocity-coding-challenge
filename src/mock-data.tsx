@@ -10,9 +10,10 @@ export interface Person {
   cost: number;
 }
 
-export type BenefitType = "medical" | "dental" | "vision";
+export type BenefitType = "Medical" | "Dental" | "Vision";
 
 export interface Benefit {
+  displayOrder: number;
   id: number;
   type: BenefitType;
 }
@@ -42,9 +43,9 @@ const peopleData: Person[] = [
 ];
 
 const benefitData: Benefit[] = [
-  { id: 0, type: "medical" },
-  { id: 1, type: "dental" },
-  { id: 2, type: "vision" },
+  { id: 0, type: "Medical", displayOrder: 0 },
+  { id: 1, type: "Dental", displayOrder: 1 },
+  { id: 2, type: "Vision", displayOrder: 2 },
 ];
 
 export { peopleData };

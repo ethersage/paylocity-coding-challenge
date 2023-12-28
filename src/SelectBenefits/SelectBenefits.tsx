@@ -3,22 +3,35 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Benefit, Person, benefitData } from "@/mock-data";
+import { Benefit, BenefitType, Person, benefitData } from "@/mock-data";
+
+export const benefitDisplayOrder: BenefitType[] = [
+  "Medical",
+  "Dental",
+  "Vision",
+];
 
 export default function SelectBenefits({ person }: { person: Person }) {
   const router = useRouter();
-  // TODO: handle non-number params
-  // TODO: handle 404 when person not found
   // TODO: handle waiting state on save
 
   const [benefits, setBenefits] = useState(person.benefits);
 
   const availableBenefits: Benefit[] = useMemo(
     () =>
+      // console.log(benefitData) ||
       // TODO: sort the benefits too
-      benefitData.filter(
-        (benefit) => benefits.find((b) => b.id === benefit.id) === undefined
-      ),
+
+      benefitData
+        .filter(
+          (benefit) => benefits.find((b) => b.id === benefit.id) === undefined
+        )
+        .sort((a, b) => a.displayOrder - b.displayOrder),
+    [benefits]
+  );
+
+  useMemo(
+    () => benefits.sort((a, b) => a.displayOrder - b.displayOrder),
     [benefits]
   );
 
