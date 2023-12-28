@@ -62,13 +62,42 @@ export default function SelectBenefits({ person }: { person: Person }) {
     }
   }
 
+  async function onDeselectBenefit(id: number) {
+    const newBenefits = benefits.filter((benefit) => benefit.id !== id);
+
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/people/${person.id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ...person, benefits: newBenefits }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      setBenefits(newBenefits);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <h1>Select benefits for {person?.name}</h1>
       <h2>Selected benefits</h2>
       <ul>
         {benefits.map((benefit) => (
-          <li key={benefit.id}>{benefit.type}</li>
+          <li key={benefit.id}>
+            <button type="button" onClick={() => onDeselectBenefit(benefit.id)}>
+              Deselect
+            </button>
+            {benefit.type}
+          </li>
         ))}
       </ul>
       <h2>Available benefits</h2>
@@ -76,7 +105,7 @@ export default function SelectBenefits({ person }: { person: Person }) {
         {availableBenefits.map((benefit) => (
           <li key={benefit.id}>
             <button type="button" onClick={() => onSelectBenefit(benefit.id)}>
-              select
+              Select
             </button>
             {benefit.type}
           </li>
