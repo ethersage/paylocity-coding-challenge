@@ -5,6 +5,7 @@ export interface Person {
   name: string;
   type: PersonType;
   benefits: Benefit[];
+  cost: number;
 }
 
 export type BenefitType = "medical" | "dental" | "vision";
@@ -19,19 +20,22 @@ const peopleData: Person[] = [
     id: 0,
     name: "Joshua Kaminetsky",
     type: "employee",
-    benefits: [{ id: 0, type: "medical" }],
+    benefits: [],
+    cost: 0,
   },
   {
     id: 1,
     name: "Bridget Kaminetsky",
     type: "spouse",
     benefits: [],
+    cost: 0,
   },
   {
     id: 2,
     name: "Amelia Kaminetsky",
     type: "dependent",
     benefits: [],
+    cost: 0,
   },
 ];
 

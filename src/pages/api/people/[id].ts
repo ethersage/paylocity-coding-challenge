@@ -1,5 +1,26 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { peopleData, Person } from "@/mock-data";
+import { Benefit, peopleData, Person } from "@/mock-data";
+
+// TODO: move into it's own module
+// See README for rationale behind calculation
+function calculateCost(person: Person) {
+  let cost = 0;
+
+  const costPerBenefit = person.type === "employee" ? 1000 : 500;
+  cost = person.benefits.length * costPerBenefit;
+
+  // API should make sure name should never be empty, but just in case
+  if (person.name.length > 0) {
+    // Maybe API should be capitalizing names for us, but it doesn't currently
+    // Not even sure what the business rules around that should be as names can have
+    // different capitalization rules in different cultures
+    const discount = person.name[0] === "A" || person.name[0] === "a" ? 0.1 : 0;
+
+    cost = cost * (1 - discount);
+  }
+
+  return cost;
+}
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
@@ -29,9 +50,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
       if (existingIndex > -1) {
         // Update existing person
-        console.log({ newPerson });
+        newPerson.cost = calculateCost(newPerson);
         peopleData[existingIndex] = newPerson;
-        console.log(peopleData[0].benefits.map((b) => b.type));
       } else {
         return res.status(400).json({ message: "Person not found" });
       }

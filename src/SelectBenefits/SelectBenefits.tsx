@@ -27,8 +27,6 @@ export default function SelectBenefits({ person }: { person: Person }) {
 
     if (newBenefit) {
       const newBenefits = [...benefits, newBenefit];
-      console.log(benefits);
-      console.log(newBenefits);
       try {
         const response = await fetch(
           `http://localhost:3000/api/people/${person.id}`,

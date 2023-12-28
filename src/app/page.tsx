@@ -20,13 +20,20 @@ export default async function Home() {
         <ul>
           {people.map((person: Person) => (
             <li key={person.id}>
-              <Link href={`/edit`}>
-                {person.name} ({person.type})
-              </Link>
-              &nbsp;
-              <Link href={`/edit/${person.id}`}>[edit]</Link>
-              &nbsp;
-              <Link href={`/select/${person.id}`}>[select benefits]</Link>
+              <div>
+                <Link href={`/edit`}>
+                  {person.name} ({person.type})
+                </Link>
+                &nbsp;
+                <Link href={`/edit/${person.id}`}>[edit]</Link>
+                &nbsp;
+                <Link href={`/select/${person.id}`}>[select benefits]</Link>
+              </div>
+              <div>
+                Selected benefits:{" "}
+                {person.benefits.map((benefit) => benefit.type).join("")}
+              </div>
+              <div>Cost: {person.cost}</div>
             </li>
           ))}
         </ul>

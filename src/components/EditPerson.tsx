@@ -21,8 +21,6 @@ export default function EditPerson({ person }: { person: Person }) {
     e.preventDefault();
 
     try {
-      console.log("saving person");
-      console.log({ name });
       const response = await fetch(
         `http://localhost:3000/api/people/${person.id}`,
         {
@@ -33,7 +31,6 @@ export default function EditPerson({ person }: { person: Person }) {
           body: JSON.stringify({ ...person, name }),
         }
       );
-      console.log(response);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -48,7 +45,6 @@ export default function EditPerson({ person }: { person: Person }) {
   }
 
   function onChange(e: FormEvent<HTMLInputElement>) {
-    console.log("setting name");
     setName(e.currentTarget.value);
   }
 

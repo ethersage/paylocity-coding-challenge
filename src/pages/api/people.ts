@@ -1,6 +1,6 @@
 // pages/api/people/index.js
 
-import { peopleData, Person } from "@/mock-data";
+import { peopleData } from "@/mock-data";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
