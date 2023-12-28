@@ -1,6 +1,6 @@
 // TODO: extract types out to their own files since they're not "mock data" as the
 // module name implies
-export type PersonType = "employee" | "spouse" | "dependent";
+export type PersonType = "Employee" | "Spouse" | "Child";
 
 export interface Person {
   id: number;
@@ -22,21 +22,21 @@ const peopleData: Person[] = [
   {
     id: 0,
     name: "Joshua Kaminetsky",
-    type: "employee",
+    type: "Employee",
     benefits: [],
     cost: 0,
   },
   {
     id: 1,
     name: "Bridget Kaminetsky",
-    type: "spouse",
+    type: "Spouse",
     benefits: [],
     cost: 0,
   },
   {
     id: 2,
     name: "Amelia Kaminetsky",
-    type: "dependent",
+    type: "Child",
     benefits: [],
     cost: 0,
   },
